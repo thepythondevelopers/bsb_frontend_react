@@ -1,0 +1,145 @@
+ul.navbar-menu a svg.icon {
+  fill: transparent;
+  stroke: #878787;
+  width: 22px;
+  height: 22px;
+}
+
+ul.navbar-menu a svg.icon[aria-labelledby="Standorte Icon"] {
+  fill: #878787;
+  stroke: transparent;
+}
+
+ul.navbar-menu a:hover svg.icon[aria-labelledby="Standorte Icon"],
+ul.navbar-menu a.active svg.icon[aria-labelledby="Standorte Icon"] {
+  fill: #ec1f27;
+  stroke: transparent;
+}
+
+ul.navbar-menu a span {
+  margin-left: 15px;
+}
+
+ul.navbar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.navbar-menu a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #878787;
+  padding: 7px 0;
+}
+
+.main-aside-active .logo {
+  margin-bottom: 15px;
+}
+
+.main-aside-active ul.navbar-menu a {
+  padding: 17px 0;
+}
+
+ul.navbar-menu a:hover,
+ul.navbar-menu a.active {
+  color: #ec1c24;
+  font-weight: 700;
+}
+
+ul.navbar-menu a:hover svg.icon,
+ul.navbar-menu a.active svg.icon {
+  stroke: #ec1c24;
+}
+
+.copyright {
+  margin-top: 20px;
+}
+
+.sidebarCont .copyright p {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  outline: 6px solid rgb(105 86 229 / 10%);
+  margin: 8px 8px 20px;
+  text-align: center;
+  font-family: Manrope;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 17px;
+  color: #818181;
+}
+
+.sidebarCont .copyright p a {
+  color: #ec1c24;
+}
+
+.ctm-navbar h6 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: 0em;
+  color: #a6a6a6;
+  border-bottom: 1px solid #c4c4c4;
+  padding-bottom: 2px;
+  margin: 22px 0 18px;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo h4 {
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  color: #272727;
+  margin-left: 15px;
+}
+
+.sidebarCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  background: #fff;
+  padding: 25px;
+  border: 1px solid #f0f0f0;
+  bottom: 0;
+  width: 20%;
+}
+
+.sidebarCont .ctm-navbar {
+  flex-grow: 1;
+}
+
+.main-wrapper .main-aside.main-aside-active .removeOnActive {
+  display: none;
+}
+
+.main-wrapper .main-aside.main-aside-active ul.navbar-menu a {
+  justify-content: center;
+}
+
+.main-wrapper .main-aside {
+  flex: 0 0 20%;
+}
+
+.main-wrapper .main-aside.main-aside-active,
+.main-wrapper .main-aside.main-aside-active .sidebarCont {
+  flex: 0 0 96px;
+  width: 96px;
+}

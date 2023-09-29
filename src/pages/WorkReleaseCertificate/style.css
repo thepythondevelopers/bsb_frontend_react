@@ -1,0 +1,416 @@
+.formPop-body-wrap {
+  border: 2px solid #9d9d9d;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.formPop .form-head button {
+  background: #e21e26;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px 4px 0 0;
+  margin-right: 5px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.03em;
+}
+
+.formPop .form-head button.active {
+  background: #ffa500;
+}
+
+.formPop-body-wrap .formPop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.formPop-body-wrap .formPop-head h6,
+.formPop-body-wrap h6 {
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  color: #000;
+}
+
+.formPop-body-wrap .formPop-body h6 {
+  margin-bottom: 25px;
+}
+
+.formPop-body-wrap .formPop-head .form-group label {
+  font-weight: bold;
+}
+
+.formPop-body-wrap .formPop-head .form-group input {
+  border: 1px solid transparent;
+  border-bottom: 1px solid #000;
+  outline: none !important;
+}
+
+.formPop .ctm-checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 22px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+}
+
+.formPop .ctm-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.formPop .ctm-checkbox-checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border: 1px solid rgb(0 0 0 / 25%);
+  border-radius: 4px;
+}
+
+.formPop .ctm-checkbox-container input:checked ~ .ctm-checkbox-checkmark {
+  background-color: #ec1c24;
+}
+
+.formPop .ctm-checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.formPop .ctm-checkbox-container input:checked ~ .ctm-checkbox-checkmark:after {
+  display: block;
+}
+
+.formPop .ctm-checkbox-container .ctm-checkbox-checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 3px;
+  height: 6px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.formPop-flex {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.formPop-block {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.formPop-flex .ctm-checkbox {
+  margin-bottom: 15px;
+}
+
+.formPop-flex .ctm-checkbox:not(:first-child) {
+  margin-left: 25px;
+}
+
+.formPop-flex .ctm-checkbox input[type="text"] {
+  width: 220px;
+  display: inline-block;
+  height: 30px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+.formPop-flex .ctm-checkbox.ctm-checbnoxInput {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.formPop-body-wrap .formPop-cmn {
+  margin-bottom: 30px;
+  display: none;
+}
+
+.formPop-flex .form-control {
+  background: none;
+  border: none;
+  display: flex;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group {
+  display: flex;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group .text-box-flexwrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.formPop-body-wrap
+  .formPop-cmn
+  .form-group
+  .text-box-flexwrap
+  input[type="text"] {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #4d4d4d;
+  width: 200px;
+  margin-bottom: 10px;
+  outline: none !important;
+  height: 30px;
+}
+
+p.simple-formPop-text {
+  letter-spacing: 0.03em;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group label {
+  margin-right: 10px;
+}
+
+.formPop-flex.flexbox-two-Col-width .ctm-checkbox,
+.formPop-flex.flexbox-two-Col-width .form-group {
+  flex: 0 0 50%;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group input[type="text"] {
+  border: none !important;
+  background: none;
+  border-bottom: 1px solid #4d4d4d !important;
+  width: auto;
+  margin-bottom: 10px;
+  outline: none !important;
+  height: 30px;
+}
+
+.formPop-flex.flex-wrap .ctm-checkbox {
+  margin-left: 0;
+}
+
+.formPop-flex.flexbox-two-Col {
+  align-items: flex-start;
+}
+
+.formPop-flex.flexbox-two-Col h6,
+.formPop-flex.flexbox-two-Col p,
+.formPop-body-wrap .formPop-cmn .formPop-flex.flexbox-two-Col .form-group {
+  flex: 0 0 50%;
+}
+
+.formPop-body-wrap .formPop-cmn .formPop-flex.flexbox-two-Col .form-group {
+  flex-direction: column-reverse;
+}
+
+.formPop-body-wrap
+  .formPop-cmn
+  .formPop-flex.flexbox-two-Col
+  .form-group
+  input[type="text"] {
+  width: 96%;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group label span.smallText-formPop {
+  display: block;
+}
+
+.formPop-body-wrap .formPop-cmn.active {
+  display: block;
+}
+
+.workCertificate {
+  background: #fff;
+  padding: 60px 40px 40px;
+  width: 80%;
+  height: 90vh;
+  overflow-y: scroll;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.workCertificate .formPop {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.workCertificate .closeModal {
+  border: 1px solid #000;
+  fill: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.formPop-footer {
+  text-align: right;
+}
+
+.certificate-box .btn-group .dropdown,
+.certificate-box .btn-group > .btn {
+  flex: 0 0 120px;
+}
+
+.certificate-box .btn-group .dropdown button.btn {
+  width: 100%;
+}
+
+ul.certificateFormCont {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+ul.certificateFormCont li:not(:last-child) {
+  padding: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.certificateFormWrap ul.dropdown-menu {
+  padding: 0;
+  min-width: 20rem;
+}
+
+.certificateFormWrap ul.dropdown-menu li p {
+  margin: 0;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+ul.certificateFormCont li {
+  padding: 10px;
+  font-size: 12px;
+  color: #000;
+}
+
+.certificate-box .btn-group ul.certificateFormCont li svg {
+  fill: #000;
+  margin: 0;
+  cursor: pointer;
+}
+
+ul.certificateFormCont li:nth-child(1) {
+  flex: 0 0 10%;
+  width: 10%;
+}
+
+ul.certificateFormCont li:nth-child(2) {
+  flex: 0 0 55%;
+  width: 55%;
+}
+
+ul.certificateFormCont li:nth-child(3) {
+  flex: 0 0 20%;
+  width: 20%;
+}
+
+ul.certificateFormCont li:nth-child(4) {
+  flex: 0 0 15%;
+  width: 15%;
+}
+
+.formPop-body-wrap .formPop-cmn.active .formPop-box {
+  display: none;
+}
+
+.formPop-body-wrap .formPop-cmn.active .formPop-box.active {
+  display: block;
+}
+
+.formPop-body-wrap .formPop-cmn .sigCanvas {
+  border-bottom: 1px solid #000;
+}
+
+.formPop-body-wrap .formPop-cmn .remove-bdr .sigCanvas {
+  border-bottom: none;
+}
+
+.formPop-flex.signatureBox .form-group {
+  align-items: flex-end;
+}
+
+.formPop-footer .btn-group .btn svg {
+  fill: #fff;
+}
+
+.formFix label {
+  flex: 0 0 90px;
+}
+
+.formFix .form-group {
+  align-items: flex-end;
+}
+
+.formPop-body-wrap
+  .formPop-cmn
+  .formFix
+  .form-group
+  .text-box-flexwrap
+  input[type="text"] {
+  width: 20vw;
+}
+
+/* .dropdown-item {
+  position: relative;
+} */
+
+/* .angle-right.open + .color-list {
+  display: block;
+} */
+
+/* .color-list.open {
+  display: block;
+} */
+
+/* .color-list {
+  width: 80%;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-right: 10px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.color-option {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.selected .color-swatch {
+  border: 2px solid #333;
+}
+.c-input {
+  margin-left: 20px;
+  cursor: pointer;
+} */

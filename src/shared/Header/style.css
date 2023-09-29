@@ -1,0 +1,248 @@
+header.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: hsl(0, 0%, 100%);
+  padding: 25px 30px;
+}
+
+header.main-header .header-left,
+header.main-header .header-right,
+header.main-header .cmn_change-hover {
+  display: flex;
+  align-items: center;
+}
+
+header.main-header svg.icon {
+  width: 20px;
+  height: 20px;
+}
+
+header.main-header img {
+  width: 20px;
+}
+
+header.main-header .cmn-style {
+  cursor: pointer;
+}
+
+header.main-header .cmn-style:not(:last-child) {
+  margin-right: 50px;
+}
+
+header.main-header .header-left .colorTheme .colorThemeImages {
+  margin-right: 14px;
+  display: flex;
+  align-items: center;
+}
+
+header.main-header img.hover-img {
+  display: none;
+}
+
+header.main-header .cmn_change-hover:hover img.hover-img {
+  display: inline-block;
+}
+
+header.main-header .cmn_change-hover:hover img.main-img {
+  display: none;
+}
+
+header.main-header .cmn_change-hover:hover p {
+  color: #ffaa10;
+}
+
+header.main-header .menu-icon svg:hover {
+  fill: #ffaa10;
+}
+
+header.main-header .searchIcon svg,
+header.main-header .bellIcom svg {
+  stroke: #000;
+}
+
+header.main-header .searchIcon svg:hover,
+header.main-header .bellIcom svg:hover {
+  stroke: #ffaa10;
+}
+
+header.main-header .profileDropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+header.main-header .profileDropdown img {
+  width: 50px;
+  margin-right: 14px;
+}
+
+header.main-header .profileDropdown .dropdownBox {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  z-index: 99;
+  min-width: 350px;
+}
+
+header.main-header .profileDropdown button.dropdown-toggle {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+header.main-header .profileDropdown .dropdownBox p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0em;
+  margin-bottom: 20px;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileInfo {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileCard {
+  display: flex;
+  align-items: flex-start;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileCard img {
+  flex: 0 0 75px;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileInfoCont h4 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileInfoCont p {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+header.main-header .profileDropdown .dropdownBox .dropProfileInfo button,
+header.main-header .profileDropdown .dropdownBox .dropProfileInfo a {
+  text-decoration: none;
+  margin-bottom: 17px;
+  display: block;
+  font-weight: 700;
+  color: #000;
+  font-size: 19px;
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+}
+
+header.main-header .menu-icon.remove-icon svg[aria-labelledby="Hamburger close"] {
+  display: block;
+}
+
+.profileDropdown svg {
+  stroke: #767676;
+}
+
+header.main-header .menu-icon svg.icon {
+  background: #ffa500;
+  stroke: #fff;
+  padding: 8px;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+}
+
+header.main-header .menu-icon svg.icon.icon-right {
+  transform: rotate(90deg);
+}
+
+header.main-header .menu-icon svg.icon.icon-left {
+  transform: rotate(-90deg);
+  display: none;
+}
+
+header.main-header .menu-icon.remove-icon svg.icon.icon-right {
+  display: none;
+}
+
+header.main-header .menu-icon.remove-icon svg.icon.icon-left {
+  display: block;
+}
+
+.main-header .dropdown .btn {
+  border: 1px solid#eee;
+  border-radius: 0;
+  padding: 5px 15px;
+  font-size: 14px;
+  margin-right: 19px;
+  box-shadow: none;
+}
+
+.main-header .dropdown ul.dropdown-menu {
+  margin-top: 10px;
+  font-size: 12px;
+  min-width: auto;
+}
+
+.dropdown.networkImages .btn {
+  border: 0;
+  margin: 0;
+}
+
+.dropdown.networkImages ul.dropdown-menu {
+  top: 34px;
+  min-width: 64px;
+}
+
+.dropdown.networkImages ul.dropdown-menu li button {
+  cursor: pointer;
+  background: transparent;
+  width: 100%;
+  border: none;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+}
+
+.main-header .board-fixed {
+  width: 13px;
+  height: 13px;
+  color: #000;
+  margin-left: 7px;
+}
+
+.ctm-selectDrop fieldset {
+  border: 1px solid #eee;
+  top: 0;
+}
+
+.ctm-selectDrop fieldset legend.css-hdw1oc {
+  display: none;
+}
+
+.ctm-selectDrop .MuiSelect-select {
+  background: #fff;
+  padding: 5px;
+  font-size: 14px !important;
+}
+
+.ctm-selectDrop .MuiOutlinedInput-root {
+  border-radius: 0;
+}
+
+ul a.itemLink {
+  padding: 10px;
+  display: inline-block;
+  border-top: 1px solid #ccc;
+  color: #000;
+  text-decoration: none;
+  margin-top: 5px;
+}

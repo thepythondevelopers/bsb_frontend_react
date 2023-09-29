@@ -1,0 +1,108 @@
+.fire-protection-box .created-report {
+    display: flex;
+    align-items: center;
+}
+
+.fire-protection-box .created-report .btn-group {
+    background: transparent;
+    display: block;
+    padding: 0;
+}
+
+.fire-protection-box .created-report .form-group {
+    flex-grow: 1;
+    padding-right: 30px;
+}
+
+.fire-protection-box .created-report .btn-group button.btn {
+    min-width: 100px;
+}
+
+.fire-protection-box .created-report:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.form-list-item {
+    margin-bottom: 26px;
+    align-items: flex-start;
+}
+
+.form-list-item p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.form-list-item strong {
+    flex: 0 0 120px;
+}
+
+.formPop .ctm-checkbox-left .ctm-checkbox-checkmark {
+    left: auto;
+    right: 0;
+}
+
+.formPop .ctm-checkbox-left .ctm-checkbox-container {
+    padding-left: 0;
+    padding-right: 22px;
+}
+
+.form-list-item>div {
+    margin-right: 20px;
+}
+
+.formPop-body-wrap .fireProtection_formbox .formPop-cmn .form-group input[type="text"] {
+    background: #F4F4F4 !important;
+    border: 1px solid #BBBBBB !important;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 14px;
+    height: 26px !important;
+    margin: 0;
+}
+
+.fireProtection_formbox textarea.form-control {
+    background: #F4F4F4;
+    border: 1px solid #BBBBBB;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.form-list-item .flex-box-same {
+    flex: 0 0 230px;
+}
+
+.form-list-item .set-half-box {
+    flex: 0 0 325px;
+}
+
+.formPop-body-wrap .formPop-cmn .form-group.small-inputBox input[type="text"] {
+    max-width: 100px;
+}
+
+.formPop-body-wrap .formPop-cmn .formPop-body .formPop-body-inner-wrap:not(:last-child) {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #CBCBCB;
+}
+
+.form-list-item .form-list-box {
+    background: #F5F5F5;
+    border-radius: 10px;
+    padding: 24px;
+    flex: 0 0 33.3%;
+}
+
+.form-list-item .form-list-box h6 {
+    margin-bottom: 12px;
+    color: #4D4D4D;
+    letter-spacing: 0.03em;
+}
+
+.form-list-item .form-list-box .form-group label {
+    display: block;
+    margin: 0 0 19px;
+}
+
+.formPop-body-wrap .fireProtection_formbox .formPop-cmn .form-list-item .form-list-box .form-group input {
+    width: 100%;
+    background: #fff !important;
+}

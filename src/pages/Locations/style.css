@@ -1,0 +1,309 @@
+.location-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.location-filter .searchFilter input {
+    border: 1px solid #eee;
+    font-size: 14px;
+    padding: 10px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.location-filter .searchFilter {
+    flex: 0 0 33%;
+}
+
+ul.locationTable li {
+    display: flex;
+    align-items: center;
+}
+
+ul.locationTable li>div {
+    flex: 0 0 12.6%;
+}
+
+ul.locationTable li>div:nth-child(1),
+ul.locationTable li>div:nth-child(2) {
+    flex: 0 0 7%;
+}
+
+ul.locationTable li>div:last-child {
+    flex: 0 0 23%;
+}
+
+/* 
+ul.locationTable li>div:nth-child(3) {
+    flex: 0 0 27%;
+}
+
+ul.locationTable li>div:nth-child(4) {
+    flex-grow: 1;
+    text-transform: capitalize;
+}
+
+ul.locationTable li>div:nth-child(5) {
+    flex: 0 0 23%;
+} */
+
+ul.locationTable li.locationTableHeading {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+    margin-bottom: 15px;
+}
+
+.locationTableWrap {
+    margin-top: 50px;
+}
+
+ul.locationTable li.locationTableItem {
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+    background: #FFFFFF;
+    box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 11px;
+}
+
+ul.locationTable li.locationTableItem .locationName {
+    display: flex;
+    align-items: flex-start;
+}
+
+ul.locationTable li.locationTableItem .locationName img {
+    border-radius: 50%;
+    margin-right: 9px;
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
+ul.locationTable li.locationTableItem .locationName .locationNameCont h6 {
+    font-family: Manrope;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 11px;
+    text-transform: capitalize;
+}
+
+ul.locationTable li.locationTableItem .locationName .locationNameCont p {
+    font-family: Manrope;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 11px;
+    margin: 0;
+}
+
+ul.locationTable li>div:nth-child(1) {
+    text-align: center;
+}
+
+ul.locationTable li>div {
+    padding: 0 10px;
+}
+
+ul.locationTable li.locationTableItem .btn-group button.btn,
+ul.locationTable li.locationTableItem .btn-group a.btn {
+    font-family: Manrope;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+ul.locationTable li.locationTableItem:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+ul.locationTable li.locationTableItem .btn-group button.btn svg.icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 22px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+    font-size: 0;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 15px;
+    width: 15px;
+    border-radius: 0;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(180deg, #E4E3E3 0%, rgba(228, 227, 227, 0.37) 42.71%, #E4E3E3 100%);
+    border: 1px solid #CDCDCD;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-container input:checked~.ctm-checkbox-checkmark {
+    background: #ec1c24;
+    border-color: #ec1c24;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-container input:checked~.ctm-checkbox-checkmark:after {
+    display: block;
+}
+
+ul.locationTable li.locationTableItem .location-checkbox .ctm-checkbox-container .ctm-checkbox-checkmark:after {
+    left: 5px;
+    top: 3px;
+    width: 3px;
+    height: 6px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+.cmnPagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cmnPagination button.MuiButtonBase-root.Mui-selected {
+    background: #185BC3;
+    color: #fff;
+}
+
+.cmnPagination button.MuiButtonBase-root {
+    font-weight: bold;
+    color: #BDBDBD;
+}
+
+/* Location Dialog */
+.location-dialog {
+    width: 50%;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    border-radius: 5px;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.location-dialog .location-dialog-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #FFA500;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+}
+
+.location-dialog .location-dialog-head h3 {
+    font-family: Poppins;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 42px;
+    margin: 0;
+}
+
+.location-dialog .location-dialog-head .closeModal {
+    fill: #FFA500;
+}
+
+.location-dialog .location-dialog-body .form-group label {
+    display: block;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+    color: #181818;
+    margin-bottom: 8px;
+}
+
+.location-dialog .location-dialog-body .form-group .form-control {
+    display: block;
+    width: 100%;
+    border: 1px solid rgb(171 171 171 / 40%);
+    height: 42px;
+    padding: 9px 16px;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+    text-align: left;
+    color: #636364;
+    outline: none;
+}
+
+.location-dialog .location-dialog-body .form-group {
+    margin-bottom: 15px;
+}
+
+.location-dialog .location-dialog-body .modal-btn-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.view-location-modal ul li {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.view-location-modal ul li h6 {
+    margin: 0;
+    flex: 0 0 50%;
+    font-weight: bold;
+}
+
+.location-dialog-body ul,
+.location-dialog-body form {
+    position: relative;
+}
+
+.location-dialog-body ul.mdoal-opacity::before,
+.location-dialog-body form.mdoal-opacity::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    height: 100%;
+}

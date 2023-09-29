@@ -1,0 +1,356 @@
+.main-body {
+  padding: 50px;
+}
+
+.sidebar {
+  display: flex;
+  position: relative;
+}
+.equals_error{
+  margin-left: 42px;
+}
+.App {
+  margin: 50px;
+}
+
+.location-btn{
+    margin-top: 300px;
+    text-align: center;
+}
+.location-nav-link{
+  text-align: center;
+  color: white;
+    background: red;
+    border-radius: 5px;
+    padding: 10px;
+}
+.location-nav-link:hover{
+  color: white;
+}
+#ex1>.box,
+#ex2 {
+  width: 100px;
+  height: 100px;
+  background-color: aquamarine;
+}
+
+label {
+  margin-right: 27px;
+}
+
+label.xy {
+  margin-right: 5px;
+}
+
+.sidebar .notesList {
+  flex: 0 0 450px;
+  width: 450px;
+  margin-right: 40px;
+  min-width: 500px;
+  position: absolute;
+  top: 0;
+}
+
+.notesList .Overlay-paper.Overlay-fullSize {
+  position: absolute;
+  width: 60%;
+  top: 50%;
+  height: auto;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+#notesListId .Cell-cell.MuiTableCell-body {
+  height: auto;
+}
+
+#notesListId .Appointment-appointment {
+  min-height: 21px;
+}
+
+/* package css */
+.taskListWrap {
+  flex-grow: 1;
+}
+
+.taskList .react-draggable,
+.modulebox .react-draggable,
+.documentUploadList .react-draggable {
+  min-width: 280px;
+  min-height: 150px;
+  overflow: hidden;
+  background-color: #fff !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.notesList .react-draggable {
+  display: block !important;
+  background-color: #fff !important;
+  min-width: 450px;
+  min-height: 403px;
+  /* transform: revert !important; */
+}
+
+.notesList.test .react-draggable {
+  transform: revert !important;
+}
+
+.taskList .react-draggable li.tackListTask {
+  padding: 0 20px;
+}
+
+ul.tackListUl li.tackListTask .ctm-checkbox-tasklist span {
+  cursor: pointer;
+}
+
+.taskList {
+  z-index: 2;
+}
+
+.moduleDropown {
+  position: relative;
+}
+
+.moduleDropown .dropIcon {
+  background: #fff;
+  color: #000;
+  min-width: 30px;
+  height: 30px;
+  padding: 4px;
+}
+
+.moduleDropown .openDrop {
+  display: none;
+  position: absolute;
+  color: #000;
+  width: 0;
+  text-align: left;
+  background: #fff;
+  top: 100%;
+  right: 0;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.moduleDropown .openDrop.show {
+  display: block;
+  width: 230px;
+}
+
+.moduleDropown .openDrop ul li {
+  padding: 12px 15px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.moduleDropown .openDrop ul li .drop-text {
+  flex-grow: 1;
+}
+
+.moduleDropown .openDrop ul li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.moduleDropown .openDrop ul li svg {
+  margin-right: 10px;
+  color: #ffa500;
+}
+
+.moduleDropown .openDrop .colorList {
+  position: absolute;
+  right: 0px;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  display: none;
+  top: 50%;
+}
+
+.moduleDropown .openDrop .colorList.show {
+  display: block;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.tab-title--active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.moduleDropown .openDrop .colorList .tab-title {
+  position: relative;
+  padding-left: 30px;
+}
+
+.moduleDropown .openDrop .colorList .tab-title::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50px;
+  border: 1px solid #000;
+}
+
+.dragable-header.White {
+  background: #fff;
+  color: #ec1f27;
+  border-bottom: 1px solid #eee;
+}
+
+.dragable-header.Black {
+  background: #000;
+  color: #fff;
+}
+
+.dragable-header.Red {
+  background: #ec1f27;
+  color: #fff;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.Red::before {
+  background: #ec1f27;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.White::before {
+  background: #fff;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.Black::before {
+  background: #000;
+}
+
+.moduleRemove {
+  display: none;
+}
+
+.moduleDropown .openDrop ul li button {
+  background: none;
+  border: none;
+  display: block;
+}
+
+.moduleHeaderOption .cmn_document-icons {
+  display: inline-block;
+  background: #fff;
+  padding: 3px;
+  margin-right: 10px;
+  width: 30px;
+}
+
+.moduleHeaderOption .cmn_document-icons svg {
+  width: 20px;
+  height: 20px;
+  fill: #000;
+}
+
+.moduleHeaderOption button.btn svg {
+  width: 25px;
+  height: 25px;
+}
+
+.moduleHeaderOption button.btn {
+  padding: 2px 3px;
+  margin-right: 10px;
+  border-radius: 0;
+  border: none;
+}
+
+.moduleHeaderOption {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.documentUploadList.docUploadReset .react-draggable,
+.modulebox.docUploadReset .react-draggable {
+  transform: revert !important;
+}
+
+.documentUploadList.increase-zindex {
+  z-index: 5;
+}
+
+.moduleHeaderOption .search-btn input[type="text"] {
+  display: none;
+}
+
+.moduleHeaderOption .active-search input[type="text"] {
+  display: block;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  border: 1px solid #eee;
+  outline: none;
+  height: 38px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.moduleHeaderOption .search-btn svg {
+  stroke: #000;
+  width: 20px;
+  height: 20px;
+}
+
+.filter-btn {
+  position: relative;
+}
+
+.filter-btn .filters-by-category {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  color: #000;
+  width: 200px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  height: 150px;
+  overflow-y: scroll;
+}
+
+.filter-btn .filters-by-category p {
+  text-align: left;
+  font-size: 12px;
+  margin: 0;
+  padding: 10px 15px;
+  border-radius: 0;
+}
+
+.filter-btn .filters-by-category p.active {
+  background: #dbdbdb;
+}
+
+.filter-btn:hover .filters-by-category {
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-btn .filters-by-category select {
+  width: 100%;
+  border: 1px solid #eee;
+  font-size: 14px;
+}
+
+.filter-btn .filters-by-category>div {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.resizeable-body {
+  width: 100%;
+  min-height: auto;
+  overflow: auto;
+  height: 100%;
+}

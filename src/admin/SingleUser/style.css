@@ -1,0 +1,193 @@
+.profileInfoCard .userImage img {
+  flex: 0 0 190px;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 190px;
+  width: 190px;
+}
+
+.profileInfoCard .companyLogo {
+  flex-grow: 1;
+}
+
+.profileInfoCard {
+  display: flex;
+  flex-direction: revert;
+}
+
+.profileInfoCard .userImage {
+  margin-right: 20px;
+  align-self: center;
+  position: relative;
+  display: inline-block;
+}
+
+.profileInfoCard .userName {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #000;
+}
+
+.userInfoCard {
+  color: #7d7b7b;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  flex-grow: 1;
+  align-self: center;
+}
+
+.profileInfoCard .userGereralInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.userInfoCard p {
+  margin-bottom: 8px;
+}
+
+.userInfoCard p svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+}
+
+.tableHeading input:focus {
+  border: 1px solid #ec1c24;
+}
+
+.profileUpdate form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profileUpdate form .form-group {
+  flex: 0 0 33.3%;
+  padding: 0 10px 10px;
+}
+
+.profileUpdate form .form-group input {
+  display: block;
+  width: 100%;
+  border: 1px solid #eee;
+  height: 41px;
+  padding: 10px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  letter-spacing: 0.03em;
+  text-align: left;
+  color: #636364;
+  outline: none;
+  box-shadow: none;
+}
+
+.profileUpdate form .form-group label {
+  display: block;
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.03em;
+  color: #181818;
+  margin-bottom: 5px;
+}
+
+.profileUpdate form .submit-btn {
+  flex-grow: 1;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
+.profileUpdate form .submit-btn button.btn {
+  display: table;
+  margin-left: auto;
+}
+
+.headingCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.headingCard h2.dasshboard_heading {
+  margin: 0;
+}
+
+.headingCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.headingCard h2.dasshboard_heading {
+  margin: 0;
+}
+
+.headingCard fieldset {
+  border: 1px solid #eee;
+  top: 0;
+}
+
+.headingCard fieldset legend.css-hdw1oc {
+  display: none;
+}
+
+.headingCard .MuiSelect-select {
+  background: #fff;
+  padding: 10px;
+}
+
+.profileInfoCard .userGereralInfo p:nth-child(2) {
+  margin-left: 30px;
+}
+
+.confirmation_model #modal-modal-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-family: "Manrope";
+}
+
+.confirmation_model .btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.confirmation_model .btn-group button {
+  flex: 0 0 45%;
+  border-radius: 4px !important;
+}
+
+.accountDelete {
+  font-size: 40px;
+  text-align: center;
+}
+
+.profileInfoCard .userImage .editIcon {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  background: #00000078;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.profileInfoCard .userImage:hover .editIcon {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.2s;
+}

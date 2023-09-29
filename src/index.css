@@ -1,0 +1,603 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Manrope", sans-serif;
+  background-color: #f5f7fb;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul {
+  list-style: none;
+  padding: 0%;
+  margin: 0%;
+}
+
+body .cmn_red_bg {
+  background-color: #ec1c24;
+  color: #fff;
+  transition: 0.5s;
+}
+
+body .cmn_red_bg:hover {
+  background-color: #ffa500;
+  color: #fff;
+  transition: 0.5s;
+}
+
+body .cmn_yellow_bg {
+  background-color: #ffa500;
+  color: #fff;
+  transition: 0.5s;
+}
+
+body .cmn_yellow_bg:hover {
+  background-color: #ec1c24;
+  color: #fff;
+  transition: 0.5s;
+}
+
+body .cmn_blue_bg {
+  background-color: #5ec5ff;
+  color: #fff;
+  transition: 0.5s;
+}
+
+body .cmn_blue_bg:hover {
+  background-color: #ec1c24;
+  color: #fff;
+  transition: 0.5s;
+}
+
+button {
+  cursor: pointer;
+}
+
+p.error {
+  color: red;
+  font-size: 12px;
+  margin: 3px 0 0;
+  font-weight: normal;
+}
+
+.wrapper {
+  padding: 70px 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dark-mode {
+  background-color: black;
+}
+
+.dark-mode h1 {
+  color: white;
+}
+
+.notes-list {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.note.new {
+  background-color: #67d7cc;
+  display: none;
+}
+
+.note.new.activeNote {
+  display: flex;
+  z-index: 1;
+}
+
+textarea {
+  border: none;
+  background-color: #67d7cc;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.save {
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+}
+
+.save:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.note {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: pre-wrap;
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 1.5em;
+}
+
+.search input {
+  border: none;
+  background-color: rgb(233, 233, 233);
+  width: 100%;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+input:focus {
+  border: 1px solid #ec1c24 !important;
+}
+
+.card-note {
+  position: absolute;
+  top: 100px;
+  left: 190px;
+  width: 200px;
+}
+
+button.addBtn {
+  background: #000;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 50px;
+  margin: 30px 20px 30px 0;
+}
+
+.MuiPaper-root .Table-table {
+  min-width: auto !important;
+}
+
+.notesList .MuiButtonBase-root.Demo-addButton {
+  position: absolute;
+  top: -16px;
+  right: 32px;
+  background: #fff;
+  color: #ffac14;
+  box-shadow: none;
+  margin: 20px;
+  z-index: 1;
+  border-radius: 0;
+  height: 36px;
+  width: 36px;
+  font-size: 25px;
+}
+
+.notesList .MuiPaper-root {
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+}
+
+.notesList .MuiDrawer-modal.Overlay-root {
+  position: fixed;
+}
+
+.tackListInpuArea input[type="text"] {
+  border: none;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  flex-grow: 1;
+  margin-right: 20px;
+  outline: none;
+}
+
+.tackListInpuArea {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.taskInputBox {
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.tackListInpuArea button {
+  border: none;
+  background-color: transparent;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  flex: 0 0 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  font-size: 25px;
+  color: #000;
+}
+
+ul.tackListUl {
+  list-style: none;
+}
+
+ul.tackListUl li.tackListTask {
+  display: flex;
+  font-size: 14px;
+}
+
+ul.tackListUl li.tackListTask input[type="text"] {
+  border: none;
+  flex-grow: 1;
+  outline: none;
+}
+
+ul.tackListUl li.tackListTask svg {
+  cursor: pointer;
+}
+
+.taskList .react-draggable li.tackListTask .checkIcon {
+  margin-right: 10px;
+}
+
+ul.tackListUl li.tackListTask:not(:last-child) {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  line-break: anywhere;
+}
+
+.dragable-header img {
+  width: 20px;
+}
+
+.dragable-header {
+  text-align: center;
+  padding: 7px 12px;
+  background: #ec1f27;
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: move;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dragable-header select {
+  border: 5px solid #fff;
+  width: 36px;
+  height: 36px;
+  outline: none;
+}
+
+.notesList .dragable-header select {
+  margin-right: 50px;
+}
+
+.dragable-header .listMove {
+  margin-right: 21px;
+}
+
+.dragable-header div {
+  cursor: pointer;
+}
+
+/* Common design */
+
+.main-wrapper {
+  display: flex;
+}
+
+.main-wrapper .main-content {
+  flex-grow: 1;
+}
+
+/* resize cursor design */
+.container {
+  border-radius: 5px;
+  width: 100vw;
+  height: 100vh;
+  background: #ffbc97;
+  position: relative;
+}
+
+.resizeable {
+  position: absolute;
+  border: 2px solid #533535;
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 15px;
+  min-height: 15px;
+}
+
+.resizer {
+  position: absolute;
+  background: transparent;
+  z-index: 1;
+}
+
+.resizer-r {
+  cursor: col-resize;
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 10px;
+}
+
+.resizer-br {
+  cursor: nw-resize;
+  background: transparent;
+  z-index: 2;
+  position: absolute;
+  right: 0%;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.resizer-bl {
+  cursor: ne-resize;
+  background: transparent;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.resizer-tr {
+  cursor: ne-resize;
+  background: transparent;
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.resizer-tl {
+  cursor: nw-resize;
+  background: transparent;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.resizer-t {
+  cursor: row-resize;
+  height: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.resizer-b {
+  cursor: row-resize;
+  height: 10px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  position: sticky;
+}
+
+.resizer-l {
+  cursor: col-resize;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 10px;
+}
+
+/* taskbar list custom checkbox */
+
+ul.tackListUl li.tackListTask .ctm-checkbox-tasklist {
+  position: relative;
+  flex-grow: 1;
+  padding-right: 10px;
+  line-break: anywhere;
+}
+
+.taskbar_icons {
+  flex: 0 0 auto;
+}
+
+.ctm-checkbox-tasklist .ctm-checkbox-cont {
+  padding-left: 10px;
+}
+
+.ctm-checkbox-tasklist .ctm-checkbox-cont input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.ctm-checkbox-tasklist .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+}
+
+.ctm-checkbox-tasklist .ctm-checkbox-cont input:checked ~ .checkmark {
+  border: 1px solid #ffa500;
+}
+
+.ctm-checkbox-tasklist .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.ctm-checkbox-tasklist .ctm-checkbox-cont input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.ctm-checkbox-tasklist .ctm-checkbox-cont .checkmark:after {
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: #ffa500;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+ul.tackListUl.taskCompleted {
+  margin-top: 50px;
+}
+
+ul.tackListUl.taskCompleted li.listCompleted {
+  background: #eee;
+  padding: 12px 20px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+ul.tackListUl.taskCompleted li:not(:first-child) {
+  font-size: 14px;
+  padding-bottom: 13px;
+}
+
+.dragable-header h4 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 800;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.card {
+  padding: 40px;
+  box-shadow: 3px 2px 10px rgb(0 0 0 / 25%);
+  border: none;
+}
+
+.card:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.heading_box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.heading_box h2.dasshboard_heading {
+  margin: 0;
+}
+
+.heading_box ul.breadcrumb {
+  margin: 0;
+}
+
+.heading_box ul.breadcrumb li {
+  position: relative;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  color: #444444;
+}
+
+.heading_box ul.breadcrumb li:not(:last-child):after {
+  content: ">>";
+  padding: 0 10px;
+  letter-spacing: -3px;
+}
+
+.heading_box ul.breadcrumb li.active {
+  color: #ffa500;
+}
+
+.btn-group .btn svg.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.btn-group button.btn {
+  border-radius: 4px !important;
+}
+
+.btn-group button.btn:not(:last-child) {
+  margin-right: 20px;
+}
+
+/* Modal Cmn CSS */
+.cmn_modal {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+
+.cmn_modal .closeModal {
+  border: 1px solid #000;
+  fill: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  cursor: pointer;
+}

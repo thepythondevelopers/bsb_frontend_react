@@ -1,0 +1,103 @@
+.dasshboard_heading {
+  font-family: Manrope;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 34px;
+  margin-bottom: 30px;
+}
+.cmn_table .MuiTableContainer-root {
+  background: none;
+  box-shadow: none;
+}
+
+.cmn_table th.MuiTableCell-head {
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  letter-spacing: 0.03em;
+  padding: 10px;
+}
+
+.cmn_table .MuiTableCell-root {
+  border: none;
+}
+
+.cmn_table .MuiTableBody-root tr {
+  border: 10px solid #f5f7fb;
+}
+
+.cmn_table .MuiTableBody-root tr .MuiTableCell-body {
+  background: #fff;
+}
+.cmn_table .MuiTableBody-root tr .MuiTableCell-body input {
+  border: 1px solid #eee;
+  height: 40px;
+  padding: 10px;
+  max-width: 100px;
+}
+.tableHeading h3 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  color: #000;
+}
+
+.tableHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.tableHeading input {
+  border: 1px solid #eee;
+  font-size: 14px;
+  padding: 10px;
+  outline: none;
+  flex: 0 0 63%;
+}
+.tableHeading input:focus {
+  border: 1px solid #ec1c24;
+}
+.filter-box .filters {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  min-width: 520px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+
+.filter-box:hover .filters {
+  opacity: 1;
+  visibility: visible;
+  transition: 0.2s;
+}
+
+.filter-box {
+  position: relative;
+}
+
+.filter-box .filters .filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+}
+.filter-box .filters .filter label {
+  font-size: 14px;
+  flex: 0 0 30%;
+}
+
+.filter-box .filters .filter select {
+  border: 1px solid #eee;
+  font-size: 14px;
+  padding: 10px;
+  outline: none;
+  flex: 0 0 63%;
+}

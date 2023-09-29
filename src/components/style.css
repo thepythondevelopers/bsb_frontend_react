@@ -1,0 +1,246 @@
+/* Event Calender */
+
+.css-99cbwm.MainLayout-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.red-cross {
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  padding: 0px 9px;
+  margin: 0px;
+}
+
+.css-99cbwm.MainLayout-container::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.css-99cbwm::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #f04724;
+}
+
+/* loader css */
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 165px;
+  height: 165px;
+  border: 10px solid #4e2008;
+}
+
+.loader span {
+  width: 50px;
+  height: 50px;
+  display: block;
+  float: left;
+  background: #a23607;
+  animation: animate 2s ease-in infinite;
+  border: 2px solid #efeacc;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.loader span:nth-child(2),
+.loader span:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+.loader span:nth-child(1),
+.loader span:nth-child(5),
+.loader span:nth-child(9) {
+  animation-delay: 0.4s;
+}
+
+.loader span:nth-child(4),
+.loader span:nth-child(8) {
+  animation-delay: 0.2s;
+}
+
+.loader span:nth-child(7) {
+  animation-delay: 0s;
+}
+
+@keyframes animate {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+
+  75% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.Demo-wrapper .MuiFormControl-root {
+  flex-grow: 1;
+}
+
+.Toolbar-toolbar .TodayButton-button::before {
+  content: "Heute";
+  font-size: 14px;
+}
+
+.Toolbar-toolbar .TodayButton-button {
+  font-size: 0;
+}
+
+/* officer Module  */
+ul.officer-list {
+  padding: 0px 10px;
+}
+
+ul.officer-list .officer-box {
+  display: flex;
+  align-items: center;
+}
+
+ul.officer-list .officer-box h6,
+.protector-officer h6 {
+  flex: 0 0 50%;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  margin: 0;
+  padding: 14px 10px;
+}
+
+ul.officer-list .officer-box p {
+  flex: 0 0 25%;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  margin: 0;
+  border-left: 1px solid #bbbbbb;
+  padding: 10px;
+}
+
+ul.officer-list li.officer-item:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.protector-officer {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.protector-officer svg.icon {
+  height: 20px;
+  width: 20px;
+}
+
+.protector-officer h6 {
+  flex: 0 0 auto;
+}
+
+.officerBlock .officer-name {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 23px;
+  margin-bottom: 20px;
+}
+
+.officerBlock .officer-form .form-group {
+  display: flex;
+  align-items: center;
+}
+
+.officerBlock .officer-form .form-group label {
+  flex: 0 0 150px;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.officerBlock .officer-form .form-group input {
+  height: 28px;
+  background: #f4f4f4;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.officerBlock .officer-form .form-group:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.officerModal {
+  margin-top: 20px;
+}
+
+.officerModal .officerBlock {
+  margin-bottom: 22px;
+}
+
+.officerModal .submitButton {
+  margin-top: 20px;
+  text-align: right;
+  display: block;
+}
+
+.cmn_modal.officerModal-Wrap {
+  padding: 25px;
+  height: 550px;
+}
+
+.moduleHeaderOption {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.tab-title--active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.moduleDropown .openDrop .colorList .tab-title {
+  position: relative;
+  padding-left: 30px;
+}
+
+.moduleDropown .openDrop .colorList .tab-title::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  background: #000;
+  border-radius: 50px;
+  border: 1px solid #000;
+}
+.moduleDropown .openDrop .colorList .tab-title.Red::before {
+  background: #ec1f27;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.White::before {
+  background: #fff;
+}
+
+.moduleDropown .openDrop .colorList .tab-title.Black::before {
+  background: #000;
+}

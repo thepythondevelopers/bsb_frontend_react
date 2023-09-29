@@ -1,0 +1,247 @@
+
+/* Linked Styles */
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    background: #ffffff;
+    -webkit-text-size-adjust: none;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+    font-size: 18px;
+    line-height: 30px;
+    padding:0 !important; margin:0 !important; display:block !important; min-width:100% !important; width:100% !important; background:#e8e8e8; -webkit-text-size-adjust:none;
+}
+.body{
+    padding:4px;
+}
+a {
+    color: #f43f4d;
+    text-decoration: none
+}
+
+p {
+    padding: 0 !important;
+    margin: 0 0 15px !important;
+    font-size: 20px;
+    line-height: 35px;
+}
+.block2{
+    margin-top: 50px;
+}
+.emp_in_bl{
+    width: 322.05px;
+}
+.signature{
+    float: right;
+}
+.heading1{
+    border-bottom: 1px solid black;
+    width: 470px;
+    margin-bottom: 40px;
+}
+.desc2{
+    margin-bottom: 40px;
+}
+.desc{
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+.last_para{
+    margin-bottom: 40px !important;
+}
+.heading2{
+    border-bottom: 1px solid black;
+    width: 170px;
+    margin-bottom: 40px !important;
+    margin-top: 40px !important;
+}
+.heading3{
+    border-bottom: 1px solid black;
+    width: 710px;
+    margin-top: 40px !important;
+    margin-bottom: 40px !important;
+}
+img {
+    -ms-interpolation-mode: bicubic;
+    /* Allow smoother rendering of resized image in Internet Explorer */
+}
+.sod{
+    border-bottom: 1px solid black;
+    width: 240px;
+}
+.mcnPreviewText {
+    display: none !important;
+}
+
+.comp_cleared{
+    width: 540px;
+    margin-top: 40px !important;
+}
+
+.main-head {
+    background-color: #dd1b1d;
+    padding: 5px 20px;
+    color: #fff;
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+    background-color: #dd1b1d;
+}
+
+ul li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+hr {
+border: none;
+margin-bottom: 30px;
+}.verti {
+transform: rotate(-90deg);
+text-align: center;
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+-ms-transform: rotate(-90deg);
+-o-transform: rotate(-90deg);
+position: absolute;
+left: 0;
+right: 0;
+width: 100%;
+display: inline-grid;
+}
+.verti h1{
+margin: 0;
+}
+.verti h3{
+margin: 0;
+}
+.table1{
+width: 100%;margin: 20px auto; background:#fff;
+}
+.tr1{
+padding:0; margin:0; font-weight:normal; vertical-align:top; padding:30px;
+}
+.th1{
+text-align: left;
+}
+.th2{
+text-align: right;
+}
+.td1{
+width:20%; vertical-align:middle; background-color: #ff8200; position: relative;-webkit-print-color-adjust: exact; 
+    print-color-adjust: exact; 
+}
+.h1{
+font-size: 50px; 
+}
+.h3{
+font-size: 30px; 
+}
+.table2{
+width: 100%;margin: 20px auto; background:#fff;
+}
+.td3{
+padding:0; margin:0; font-weight:normal; vertical-align:top; padding:30px;
+}
+.th3{
+text-align: right;
+}
+.p1{
+color:red;
+}
+.table3{
+width: 100%;margin: 20px auto; background:#fff;
+}
+.td4{
+padding:0; margin:0; font-weight:normal; vertical-align:top; padding:30px;
+}
+.th4{
+text-align: right;
+}
+.h4{
+background-color: #dd1b1d !important;
+}
+.table4{
+width: 100%;margin: 20px auto; background:#fff;
+}
+.td5{
+padding:0; margin:0; font-weight:normal; vertical-align:top; padding:30px;
+}
+.table5{
+width: 100%;margin: 20px auto; background:#fff;
+}
+
+/* Linked Styles */
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    background: #ffffff;
+    -webkit-text-size-adjust: none;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+}
+
+a {
+    color: #f43f4d;
+    text-decoration: none
+}
+
+p {
+    padding: 0 !important;
+    margin: 0 0 15px !important;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+img {
+    -ms-interpolation-mode: bicubic;
+    /* Allow smoother rendering of resized image in Internet Explorer */
+}
+
+.mcnPreviewText {
+    display: none !important;
+}
+
+.main-head {
+    background-color: #dd1b1d;
+    padding: 5px 20px;
+    color: #fff;
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+}
+
+ul li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+hr {
+border: none;
+margin-bottom: 30px;
+}.verti {
+transform: rotate(-90deg);
+text-align: center;
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+-ms-transform: rotate(-90deg);
+-o-transform: rotate(-90deg);
+position: relative;
+left: 0;
+right: 0;
+width: 100%;
+display: inline-grid;
+}
+.verti h1{
+margin: 0;
+}
+.verti h3{
+margin: 0;
+}
+.th5{
+text-align: right;
+}
