@@ -257,90 +257,341 @@ const OfficerRegulation = () => {
     }
   }
 
-  function pdfDownloadFormAPI(id) {
+  async function pdfDownloadFormAPI(id) {
+    // if (id === "bso_a_body1") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body1"), {
+    //     callback: function (pdf) {
+    //       var file1 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file1);
+    //       setPdfFile(file1);
+    //     },
+    //   });
+    // }
+
     if (id === "bso_a_body1") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body1"), {
-        callback: function (pdf) {
-          var file1 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body1");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file1 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file1);
           setPdfFile(file1);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "bso_a_body2") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body2"), {
+    //     callback: function (pdf) {
+    //       var file2 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file2);
+    //       setPdfFile(file2);
+    //     },
+    //   });
+    // }
+
     if (id === "bso_a_body2") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body2"), {
-        callback: function (pdf) {
-          var file2 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body2");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file2 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file2);
           setPdfFile(file2);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "bso_a_body3") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body3"), {
+    //     callback: function (pdf) {
+    //       var file3 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file3);
+    //       setPdfFile(file3);
+    //     },
+    //   });
+    // }
+
     if (id === "bso_a_body3") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body3"), {
-        callback: function (pdf) {
-          var file3 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body3");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file3 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file3);
           setPdfFile(file3);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "bso_a_body4") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body4"), {
+    //     callback: function (pdf) {
+    //       var file4 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file4);
+    //       setPdfFile(file4);
+    //     },
+    //   });
+    // }
+
     if (id === "bso_a_body4") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body4"), {
-        callback: function (pdf) {
-          var file4 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body4");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file4 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file4);
           setPdfFile(file4);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "bso_a_body5") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body5"), {
+    //     callback: function (pdf) {
+    //       var file5 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file5);
+    //       setPdfFile(file5);
+    //     },
+    //   });
+    // }
+
     if (id === "bso_a_body5") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body5"), {
-        callback: function (pdf) {
-          var file5 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body5");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file5 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file5);
           setPdfFile(file5);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "bso_a_body6") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#bso_a_body6"), {
+    //     callback: function (pdf) {
+    //       var file6 = new File([pdf.output()], "bso_a.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file6);
+    //       setPdfFile(file6);
+    //     },
+    //   });
+    // }
     if (id === "bso_a_body6") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#bso_a_body6"), {
-        callback: function (pdf) {
-          var file6 = new File([pdf.output()], "bso_a.pdf", {
+      const elementsToPrint = document.querySelectorAll("#bso_a_body6");
+      const pdf = new jsPDF({
+        orientation: "landscape",
+      });
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage("landscape");
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file6 = new File([pdf.output("blob")], "bso_a.pdf", {
             type: "application/pdf",
           });
+
           console.log("pdf file:: ", file6);
           setPdfFile(file6);
-        },
-      });
+        }
+      }
     }
+
+    // if (id === "body") {
+    //   var doc = new jsPDF("p", "pt");
+    //   doc.html(document.querySelector("#body"), {
+    //     callback: function (pdf) {
+    //       var file_bso_b = new File([pdf.output()], "bso_b.pdf", {
+    //         type: "application/pdf",
+    //       });
+    //       console.log("pdf file:: ", file_bso_b);
+    //       setPdfFile(file_bso_b);
+    //     },
+    //   });
+    // }
     if (id === "body") {
-      var doc = new jsPDF("p", "pt");
-      doc.html(document.querySelector("#body"), {
-        callback: function (pdf) {
-          var file_bso_b = new File([pdf.output()], "bso_b.pdf", {
-            type: "application/pdf",
-          });
+      const elementsToPrint = document.querySelectorAll("#body");
+      const pdf = new jsPDF();
+
+      for (let index = 0; index < elementsToPrint.length; index++) {
+        if (index !== 0) {
+          pdf.addPage();
+        }
+
+        const element = elementsToPrint[index];
+        const canvas = await html2canvas(element);
+
+        const imgData = canvas.toDataURL("image/png");
+        pdf.addImage(
+          imgData,
+          "PNG",
+          0,
+          0,
+          pdf.internal.pageSize.getWidth(),
+          pdf.internal.pageSize.getHeight()
+        );
+
+        if (index === elementsToPrint.length - 1) {
+          var file_bso_b = new File(
+            [pdf.output("blob")],
+            "fireRegulation.pdf",
+            {
+              type: "application/pdf",
+            }
+          );
+
           console.log("pdf file:: ", file_bso_b);
           setPdfFile(file_bso_b);
-        },
-      });
+        }
+      }
     }
   }
 
@@ -1544,6 +1795,34 @@ const OfficerRegulation = () => {
     setAddDocument(true);
     setCategoryList(false);
   };
+
+  async function generatePDF() {
+    const elementsToPrint = document.querySelectorAll("#bso_a_body6");
+    const pdf = new jsPDF();
+
+    for (let index = 0; index < elementsToPrint.length; index++) {
+      if (index !== 0) {
+        pdf.addPage(); // Add a new page for each element except the first one
+      }
+
+      const element = elementsToPrint[index];
+      const canvas = await html2canvas(element);
+
+      const imgData = canvas.toDataURL("image/png");
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdf.internal.pageSize.getWidth(),
+        pdf.internal.pageSize.getHeight()
+      );
+
+      if (index === elementsToPrint.length - 1) {
+        pdf.save("OfficerRegulation.pdf"); // Save the PDF after processing all elements
+      }
+    }
+  }
 
   return (
     <div className="main-body">
@@ -4750,6 +5029,7 @@ const OfficerRegulation = () => {
           </tr>
         </table>
       </div>
+      <button onClick={generatePDF}>Download PDF</button>
 
       {Show_BSO_A_template_1 ? (
         <>
@@ -6729,6 +7009,7 @@ const OfficerRegulation = () => {
                       </td>
                     </tr>
                   </table>
+
                   <table
                     style={{
                       borderTop: "1px solid #333",

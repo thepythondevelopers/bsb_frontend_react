@@ -1206,92 +1206,41 @@ function Evacuation() {
         document.getElementById("evacuation_date").innerHTML =
           result.date.substring(0, 10);
 
-        const elementToPrint = document.getElementById("body");
-        const canvas = await html2canvas(elementToPrint);
-
-        const imgData = canvas.toDataURL("image/png");
-
+        const elementsToPrint = document.querySelectorAll("#body");
         const pdf = new jsPDF();
 
-        pdf.addImage(
-          imgData,
-          "PNG",
-          0,
-          0,
-          pdf.internal.pageSize.getWidth(),
-          pdf.internal.pageSize.getHeight()
-        );
+        for (let index = 0; index < elementsToPrint.length; index++) {
+          if (index !== 0) {
+            pdf.addPage();
+          }
 
-        var file = new File([pdf.output("blob")], "evacuation.pdf", {
-          type: "application/pdf",
-        });
+          const element = elementsToPrint[index];
+          const canvas = await html2canvas(element);
 
-        console.log("pdf file:: ", file);
-        setPdfFile(file);
+          const imgData = canvas.toDataURL("image/png");
+          pdf.addImage(
+            imgData,
+            "PNG",
+            0,
+            0,
+            pdf.internal.pageSize.getWidth(),
+            pdf.internal.pageSize.getHeight()
+          );
+
+          if (index === elementsToPrint.length - 1) {
+            var file = new File([pdf.output("blob")], "evacuation.pdf", {
+              type: "application/pdf",
+            });
+
+            console.log("pdf file:: ", file);
+            setPdfFile(file);
+          }
+        }
       }
     } catch (error) {
       console.error("Error generating PDF:", error);
     }
   }
-
-  // function generatePDF() {
-  //   const elementToPrint = document.getElementById("body");
-  //   html2canvas(elementToPrint).then((canvas) => {
-  //     const imgData = canvas.toDataURL("image/png");
-  //     const pdf = new jsPDF();
-  //     pdf.addImage(
-  //       imgData,
-  //       "PNG",
-  //       0,
-  //       0,
-  //       pdf.internal.pageSize.getWidth(),
-  //       pdf.internal.pageSize.getHeight()
-  //     );
-  //     pdf.save("evacuation.pdf");
-  //   });
-  // }
-
-  // async function pdfDownloadFormAPI(id) {
-  //   try {
-  //     // Fetch data from the API
-  //     const response = await fetch(`${API}/get-evacuation/${id}`, {
-  //       method: "GET",
-  //       headers: {
-  //         "x-access-token": token,
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-
-  //     const result = await response.json();
-  //     console.log("result from get evacuation:", result);
-
-  //     if (result) {
-
-  //       const today = new Date().toISOString().split("T")[0];
-  //       document.getElementById("current_date").innerHTML = today;
-
-  //       const evacuationDate = result.date.substring(0, 10);
-  //       console.log("Evacuation date:", evacuationDate);
-  //       document.getElementById("evacuation_date").innerHTML = evacuationDate;
-
-  //       const doc = new jsPDF("p", "pt");
-
-  //       doc.html(document.querySelector("#body"), {
-  //         callback: function (pdf) {
-  //           var file = new File([pdf.output()], "evacuation.pdf", {
-  //             type: "application/pdf",
-  //           });
-  //           console.log("pdf file:: ", file);
-  //           setPdfFile(file);
-  //         },
-  //       });
-  //     }
-  //   } catch (error) {
-
-  //     console.error("Error:", error);
-  //   }
-  // }
 
   async function wordDownloadFormAPI(id) {
     let result = await fetch(`${API}/get-evacuation/${id}`, {
@@ -2806,7 +2755,8 @@ function Evacuation() {
             </td>
           </tr>
         </table>
-
+      </div>
+      <div id="body" class="body">
         <table
           width="100%"
           className="table4"
@@ -3080,8 +3030,6 @@ function Evacuation() {
           </tr>
         </table>
       </div>
-
-      {/* <button onClick={generatePDF}>Download PDF</button> */}
 
       <div style={{ position: "fixed" }} className="resizeable-body">
         <div
