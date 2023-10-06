@@ -20,6 +20,7 @@ import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutl
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
 import JoditEditor from "jodit-react";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -48,6 +49,17 @@ const OfficerRegulation = () => {
   const [updatePartC, setupdatePartC] = useState(false);
 
   const editor = useRef(null);
+
+  function stripHtmlTags(html) {
+    // Create a temporary div element
+    const tempDiv = document.createElement("div");
+
+    // Set the HTML content of the div
+    tempDiv.innerHTML = html;
+
+    // Extract the text content
+    return tempDiv.textContent || tempDiv.innerText || "";
+  }
 
   document.addEventListener(
     "click",
@@ -1797,7 +1809,7 @@ const OfficerRegulation = () => {
   };
 
   async function generatePDF() {
-    const elementsToPrint = document.querySelectorAll("#bso_a_body6");
+    const elementsToPrint = document.querySelectorAll("#body");
     const pdf = new jsPDF();
 
     for (let index = 0; index < elementsToPrint.length; index++) {
@@ -1823,6 +1835,153 @@ const OfficerRegulation = () => {
       }
     }
   }
+  // async function generatePDF1() {
+  //   const elementsToPrint = document.querySelectorAll("#body1");
+  //   const pdf = new jsPDF();
+
+  //   for (let index = 0; index < elementsToPrint.length; index++) {
+  //     if (index !== 0) {
+  //       pdf.addPage(); // Add a new page for each element except the first one
+  //     }
+
+  //     const element = elementsToPrint[index];
+  //     const canvas = await html2canvas(element);
+
+  //     const imgData = canvas.toDataURL("image/png");
+  //     pdf.addImage(
+  //       imgData,
+  //       "PNG",
+  //       0,
+  //       0,
+  //       pdf.internal.pageSize.getWidth(),
+  //       pdf.internal.pageSize.getHeight()
+  //     );
+
+  //     if (index === elementsToPrint.length - 1) {
+  //       pdf.save("OfficerRegulation.pdf"); // Save the PDF after processing all elements
+  //     }
+  //   }
+  // }
+
+  const downloadPDF = () => {
+    // Get the body element by its ID
+    const bodyElement = document.getElementById("body1");
+
+    // Configuration for html2canvas
+    const options = { scale: 2 };
+
+    // Use html2canvas to convert the body to canvas
+    html2canvas(bodyElement, options).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+
+      // Calculate dimensions of A4 page
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+
+      // Create a new jsPDF instance
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      // Add the canvas image to the PDF
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      // Download the generated PDF
+      pdf.save("document.pdf");
+    });
+  };
+
+  async function generatePDF1() {
+    const elementsToPrint = document.querySelectorAll("#body1");
+    const pdf = new jsPDF();
+
+    for (let index = 0; index < elementsToPrint.length; index++) {
+      if (index !== 0) {
+        pdf.addPage(); // Add a new page for each element except the first one
+      }
+
+      const element = elementsToPrint[index];
+      const canvas = await html2canvas(element);
+
+      const imgData = canvas.toDataURL("image/png");
+
+      // Get the actual content height and width
+      const contentHeight = canvas.height;
+      const contentWidth = canvas.width;
+
+      // Calculate the aspect ratio to maintain the content proportions
+      const aspectRatio = contentWidth / contentHeight;
+
+      // Calculate the new height to fit the page width
+      const newHeight = pdf.internal.pageSize.getWidth() / aspectRatio;
+
+      // Add the image with the new height
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdf.internal.pageSize.getWidth(),
+        newHeight
+      );
+
+      if (index === elementsToPrint.length - 1) {
+        pdf.save("OfficerRegulation.pdf"); // Save the PDF after processing all elements
+      }
+    }
+  }
+  async function generatePDF2() {
+    const elementsToPrint = document.querySelectorAll("#body");
+    const pdf = new jsPDF();
+
+    for (let index = 0; index < elementsToPrint.length; index++) {
+      if (index !== 0) {
+        pdf.addPage(); // Add a new page for each element except the first one
+      }
+
+      const element = elementsToPrint[index];
+      const canvas = await html2canvas(element);
+
+      const imgData = canvas.toDataURL("image/png");
+
+      // Get the actual content height and width
+      const contentHeight = canvas.height;
+      const contentWidth = canvas.width;
+
+      // Calculate the aspect ratio to maintain the content proportions
+      const aspectRatio = contentWidth / contentHeight;
+
+      // Calculate the new height to fit the page width
+      const newHeight = pdf.internal.pageSize.getWidth() / aspectRatio;
+
+      // Add the image with the new height
+      pdf.addImage(
+        imgData,
+        "PNG",
+        0,
+        0,
+        pdf.internal.pageSize.getWidth(),
+        newHeight
+      );
+
+      if (index === elementsToPrint.length - 1) {
+        pdf.save("OfficerRegulation.pdf"); // Save the PDF after processing all elements
+      }
+    }
+  }
+
+  // function generatePDF2() {
+  //   // Select the table element
+  //   const table = document.querySelector("#body1");
+  //   const options = {
+  //     margin: 5, // Adjust this value as needed
+  //     filename: "your_table.pdf",
+  //     image: { type: "jpeg", quality: 0.98 },
+  //     html2canvas: { scale: 1.5 }, // Adjust this value as needed
+  //     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  //   };
+
+  //   // Use html2pdf to generate the PDF
+  //   html2pdf(table, options);
+  // }
 
   return (
     <div className="main-body">
@@ -2495,8 +2654,9 @@ const OfficerRegulation = () => {
                                 cols="30"
                                 rows="10"
                                 value={partBForm.introduction}
-                                onChange={(val) => {
-                                  handlePartBInput(val, "introduction");
+                                onChange={(val, content) => {
+                                  const plainText = stripHtmlTags(content);
+                                  handlePartBInput(plainText, "introduction");
                                 }}
                               />
                             </div>
@@ -4319,33 +4479,123 @@ const OfficerRegulation = () => {
       )}
       <ToastContainer />
       <h2>BSO Part B</h2>
+
       <div id="body" class="body">
         <table
           width="100%"
           className="table1"
           border="0"
+          cellSpacing="0"
+          cellPadding="0"
+          style={{
+            maxWidth: "100%",
+            margin: "auto",
+            borderCollapse: "collapse",
+          }}
+        >
+          <tbody>
+            <tr>
+              <td className="column-top" width="70%">
+                <table
+                  width="100%"
+                  border="0"
+                  cellSpacing="0"
+                  cellPadding="0"
+                  style={{ borderCollapse: "collapse" }}
+                >
+                  <tbody>
+                    <tr>
+                      <th className="column th2">
+                        <div style={{ textAlign: "center" }}>
+                          <img
+                            style={{
+                              marginBottom: "100px",
+                              marginLeft: "40px",
+                            }}
+                            className="logofst"
+                            src="/assets/images/logo003.png"
+                            width="100"
+                            height="95"
+                            border="0"
+                            alt=""
+                          />
+                        </div>
+                      </th>
+                      <th className="column th1">
+                        <div style={{ textAlign: "center" }}>
+                          <h5
+                            style={{ fontWeight: "700", marginBottom: "100px" }}
+                          >
+                            Stand: 24.11.2022
+                          </h5>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <img
+                          src="assets/images/first001.jpg"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            maxHeight: "100%",
+                          }}
+                          alt=""
+                        />
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "column",
+                            marginTop: "50px",
+                          }}
+                        >
+                          <img
+                            src="assets/images/footpic.jpg"
+                            alt=""
+                            style={{ width: "20%", marginTop: "100px" }}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td
+                className="td2 column-top"
+                width="30%"
+                style={{ verticalAlign: "top" }}
+              >
+                <img src="assets/images/bsoBhead.png" alt="" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          width="100%"
+          className="table2"
+          border="0"
           cellspacing="0"
           cellpadding="0"
         >
           <tr>
-            <td class="column-top" width="80%" className="">
+            <td class="td3 column-top" width="100%" colspan="2">
               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <th class="column th2">
+                  <th class="th3 column" width="">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
-                  <th class="column th1" width="">
-                    Stand: 24.11.2022
-                  </th>
                 </tr>
+
+                <br />
                 <tr>
-                  <td colspan="2">
+                  <td>
                     <h2 class="h21 main-head">Vorwort</h2>
                     <p>
                       Diese Brandschutzordnung enthält Regeln für die
@@ -4378,41 +4628,6 @@ const OfficerRegulation = () => {
                       Pflichten hinaus besondere Aufgaben im Brandschutz
                       übertragen wurden.
                     </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-            <td class="td2 column-top" width="20%" bgcolor="#ff8200">
-              <div class="verti">
-                <h1 className="h12">Brandschutzordnung</h1>
-                <h3 className="h31">Teil B nach DIN 14096</h3>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <table
-          width="100%"
-          className="table2"
-          border="0"
-          cellspacing="0"
-          cellpadding="0"
-        >
-          <tr>
-            <td class="td3 column-top" width="100%" colspan="2">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <th class="th3 column" width="">
-                    <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
-                      border="0"
-                      alt=""
-                    />
-                  </th>
-                </tr>
-                <tr>
-                  <td>
                     <p>
                       Aus Gründen der besseren Lesbarkeit wird auf die
                       gleichzeitige Verwendung männlicher und weiblicher
@@ -4438,14 +4653,14 @@ const OfficerRegulation = () => {
                 <tr>
                   <th class="th5 column" width="">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
                 </tr>
+                <br />
                 <tr>
                   <td>
                     <h2 class="h22 main-head">Inhalt</h2>
@@ -4532,14 +4747,14 @@ const OfficerRegulation = () => {
                 <tr>
                   <th class="column" width="" className="th6">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
                 </tr>
+                <br />
                 <tr>
                   <td>
                     <h2 class="main-head" id="template_introduction">
@@ -4575,6 +4790,8 @@ const OfficerRegulation = () => {
                           erstellt.
                         </li>
                       </ul>
+
+                      {/* {partBForm.introduction} */}
                     </div>
                     <hr />
                     <h2 class="main-head">
@@ -4583,7 +4800,8 @@ const OfficerRegulation = () => {
                     </h2>
                     <p className="p1">
                       <img
-                        src="/assets/images/firesafety.jpg"
+                        src="/assets/images/firesafety1.jpg"
+                        width="80%"
                         alt=""
                         title=""
                       />
@@ -4610,15 +4828,14 @@ const OfficerRegulation = () => {
                 <tr>
                   <th class="column" width="" className="th6">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
                 </tr>
-
+                <br />
                 <tr>
                   <td>
                     <h2 class="main-head">c) Fire prevention</h2>
@@ -4805,19 +5022,34 @@ const OfficerRegulation = () => {
                 <tr>
                   <th class="column" width="" className="th6">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
                 </tr>
-
+                <br />
                 <tr>
                   <td>
                     <h2 class="main-head">g) Behavior in case of fire</h2>
-                    <p></p>
+                    <p>
+                      Feuerlöscher sind in allen Bereichen des Betriebes
+                      ________________ gut zugänglich stationiert. Es handelt
+                      sich dabei überwiegend um Pulverlöscher. Es wird
+                      empfohlen, sich regelmäßig mit der Bedienungsanleitung der
+                      Feuerlöscher vertraut zu machen. Die Standorte der
+                      Feuerlöscher müssen immer frei zugänglich sein. Benutzte
+                      bzw. auch nur teilweise benutzte Feuerlöscher sind
+                      unverzüglich zu erneuern (Wartungsdienst siehe Aufkleber).
+                      Hydranten werden durch die Feuerwehr oder eingewiesenes
+                      Personal bedient. Die Entnahmestellen für Löschwasser
+                      (Platz um Hydranten) müssen stets frei zugänglich sein.
+                      Einspeisestellen für Löschwasser bzw. die Inertisierung
+                      der Siloanlage müssen für die Feuerwehr immer ungehindert
+                      zugänglich sein. Das Abstellen von Waren, Geräten oder das
+                      Parken von Fahrzeu in diesen Bereich ist verboten.
+                    </p>
                     <hr />
                     <h2 class="main-head">h) Report fire</h2>
                     <p>
@@ -4919,15 +5151,14 @@ const OfficerRegulation = () => {
                 <tr>
                   <th class="column" width="" className="th6">
                     <img
-                      src="/assets/images/template-logo.png"
-                      width="131"
-                      height="64"
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
                       border="0"
                       alt=""
                     />
                   </th>
                 </tr>
-
+                <br />
                 <tr>
                   <td>
                     <h2 class="main-head">l) Special rules of conduct</h2>
@@ -5029,8 +5260,1891 @@ const OfficerRegulation = () => {
           </tr>
         </table>
       </div>
-      <button onClick={generatePDF}>Download PDF</button>
 
+      <button onClick={generatePDF}>Download PDF</button>
+      <button onClick={generatePDF2}>Download PDF2</button>
+
+      <div id="body1" class="body">
+        <table
+          width="100%"
+          className="table1"
+          border="0"
+          cellSpacing="0"
+          cellPadding="0"
+          style={{
+            maxWidth: "100%",
+            margin: "auto",
+            borderCollapse: "collapse",
+          }}
+        >
+          <tbody>
+            <tr>
+              <td className="column-top" width="70%">
+                <table
+                  width="100%"
+                  border="0"
+                  cellSpacing="0"
+                  cellPadding="0"
+                  style={{ borderCollapse: "collapse" }}
+                >
+                  <tbody>
+                    <tr>
+                      <th className="column th2">
+                        <div style={{ textAlign: "center" }}>
+                          <img
+                            style={{
+                              marginBottom: "100px",
+                              marginLeft: "40px",
+                            }}
+                            className="logofst"
+                            src="/assets/images/logo003.png"
+                            width="100"
+                            height="95"
+                            border="0"
+                            alt=""
+                          />
+                        </div>
+                      </th>
+                      <th className="column th1">
+                        <div style={{ textAlign: "center" }}>
+                          <h5
+                            style={{ fontWeight: "700", marginBottom: "100px" }}
+                          >
+                            Stand: 24.11.2022
+                          </h5>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <img
+                          src="assets/images/image002.jpg"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            maxHeight: "100%",
+                          }}
+                          alt=""
+                        />
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "column",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <img
+                            src="assets/images/footpic.jpg"
+                            alt=""
+                            style={{ width: "20%", marginTop: "100px" }}
+                          />
+                          <h1
+                            style={{
+                              marginTop: "20px",
+                              textAlign: "center",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Gerd Bär GmbH <br />
+                            Am Straßerand 14 <br />
+                            71228 Muster
+                          </h1>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td
+                className="td2 column-top"
+                width="30%"
+                style={{ verticalAlign: "top" }}
+              >
+                <img
+                  src="assets/images/image0001.png"
+                  alt=""
+                  style={{ width: "100%" }}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="body1" class="body">
+        <table
+          width="100%"
+          className="table2"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td4 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th5 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h22 main-head">Inhalt</h2>
+                    <ul>
+                      <li>
+                        VORWORT/BEWERTUNGSGRUNDLAGE _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 3
+                      </li>
+                      <li>
+                        BRANDKLASSEN/LOSCHMITTEL _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 3
+                      </li>
+                      <li>
+                        GRUNDFLACHE _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 4
+                      </li>
+                      <li>
+                        GRANDGEFAHRDUNG _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 4
+                      </li>
+                      <li>
+                        LOSCHMITTELEINHEITEN _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _5
+                      </li>
+                      <li>
+                        AUSSTATTUNG FEUERLOSCHER _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+                        _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _6
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <hr />
+        <table
+          width="100%"
+          className="table3"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Vorwort/Bewertungsgrundlage</h2>
+                    <p>
+                      <table
+                        width="100%"
+                        className="table2"
+                        border="0"
+                        cellspacing="0"
+                        cellpadding="0"
+                      >
+                        <tr>
+                          <table
+                            width="100%"
+                            border="0"
+                            cellspacing="0"
+                            cellpadding="0"
+                          >
+                            <tr>
+                              <td>
+                                <p>
+                                  Diese Brandschutzordnung enthält Regeln für
+                                  die Brandverhütung und Anweisungen über das
+                                  Verhalten und die Maßnahmen bei Ausbruch eines
+                                  Brandes. Die nachfolgenden Regelungen dienen
+                                  dem vorbeugenden Brandschutz im Gebäude. Die
+                                  Brandschutzordnung entbindet nicht von der
+                                  Verpflichtung, sonstige Arbeitsschutz- und
+                                  Unfallverhütungsvorschriften zu beachten und
+                                  einzuhalten.
+                                </p>
+                                <p>
+                                  Das Objekt soll im Rahmen der
+                                  Gefährdungsbeurteilung gemäß den Vorgaben der
+                                  ASR A2.2 mit Feuerlöschern ausgestattet
+                                  werden.
+                                </p>
+                                <p>
+                                  Die Gefährdungsbeurteilung findet auf
+                                  Grundlage folgender Geschosspläne statt.
+                                </p>
+                                <div
+                                  style={{
+                                    textAlign: "center",
+                                    marginTop: "50px",
+                                  }}
+                                >
+                                  <table
+                                    cellspacing="0"
+                                    cellpadding="0"
+                                    style={{
+                                      marginRight: "auto",
+                                      marginLeft: "auto",
+                                      borderCollapse: "collapse",
+                                    }}
+                                  >
+                                    <tr style={{ height: "19.5pt" }}>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "justify",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            Erdgeschoss
+                                          </span>
+                                        </p>
+                                      </td>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "end",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            Stand: 15.10.2019
+                                          </span>
+                                        </p>
+                                      </td>
+                                    </tr>
+                                    <tr style={{ height: "19.5pt" }}>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "justify",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            1. Obergeschoss
+                                          </span>
+                                        </p>
+                                      </td>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "end",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            Stand: 15.10.2019
+                                          </span>
+                                        </p>
+                                      </td>
+                                    </tr>
+                                    <tr style={{ height: "19.5pt" }}>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "justify",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            2. Obergeschoss
+                                          </span>
+                                        </p>
+                                      </td>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "end",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            Stand: 15.10.2019
+                                          </span>
+                                        </p>
+                                      </td>
+                                    </tr>
+                                    <tr style={{ height: "19.5pt" }}>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "justify",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            3. Obergeschoss
+                                          </span>
+                                        </p>
+                                      </td>
+                                      <td
+                                        style={{
+                                          width: "272.7pt",
+                                          borderColor: "black",
+                                          borderBottomStyle: "solid",
+                                          borderBottomWidth: "1px",
+                                          paddingRight: "5.4pt",
+                                          paddingLeft: "5.4pt",
+                                          verticalAlign: "bottom",
+                                        }}
+                                      >
+                                        <p
+                                          style={{
+                                            textAlign: "end",
+                                            lineHeight: "12pt",
+                                          }}
+                                        >
+                                          <span style={{ fontSize: "12pt" }}>
+                                            Stand: 15.10.2019
+                                          </span>
+                                        </p>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </tr>
+                      </table>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="body1" class="body">
+        <table
+          width="100%"
+          className="table4"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Brandklassen/Loschmittel</h2>
+                    <p>
+                      Grundsätzlich sind überall, wo es die Brandklasse erlaubt,
+                      Wasser- oder Schaumlöscher einzusetzen. Feuerlöscher mit
+                      Pulver sind nur dort zulässig, wo es die Brandklasse
+                      notwendig macht. In Gebäuden, in denen nicht mit Gas
+                      gearbeitet wird, entspricht dies nicht dem Stand der
+                      Technik.
+                    </p>
+                    <p>Das Objekt sollte vorzugsweise mit </p>
+                    <p style={{ textAlign: "center" }}>
+                      - <br /> Schaumlöscher <br /> - CO2-
+                    </p>
+                    <p>
+                      als Löschmittel in den Feuerlöschern ausgestattet werden.
+                      Sollte es aufgrund der vorhandenen Brandklassen notwendig
+                      sein, andere Löschmittel auszuwählen, so ist dies jeweils
+                      mit der zuständigen Brandschutzbeauftragten abzustimmen.
+                    </p>
+                    <p>Im Objekt sind folgende Brandklassen anzutreffen:</p>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <img
+                        style={{ margin: "10px" }}
+                        src="/assets/images/r1.jpg"
+                        alt=""
+                      />
+                      <img
+                        style={{ margin: "10px" }}
+                        src="/assets/images/r2.jpg"
+                        alt=""
+                      />
+                      <img
+                        style={{ margin: "10px" }}
+                        src="/assets/images/r3.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <hr />
+        <table
+          width="100%"
+          className="table5"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Grundflache</h2>
+                    <p>
+                      Die Grundflächen der Geschosse sind in dem Plan wie folgt
+                      aufgeführt.
+                    </p>
+                    <br />
+                    <br />
+
+                    <div style={{ textAlign: "center" }}>
+                      <table
+                        cellSpacing="0"
+                        cellPadding="0"
+                        style={{
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          border: "1px solid #000000",
+                          borderCollapse: "collapse",
+                        }}
+                      >
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>Geschoss</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>
+                                Fläche (m²)
+                              </span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>EG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>16733</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>1. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>17044</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>2. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>13534</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>3. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>13534</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>4. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>9872</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>5. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>8273</span>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="body1" class="body">
+        <table
+          width="100%"
+          className="table2"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Brandgefährdung</h2>
+                    <p>Das Gebäude wird nach ASR A 2.2 in die Kategorie</p>
+                    <p style={{ textAlign: "center" }}>
+                      „normale Brandgefährdung“ oder „erhöhte Brandgefährdung“
+                    </p>
+                    <p>eingestuft.</p>
+                    <p>
+                      Wegen der erhöhten Brandgefährdung werden folgende
+                      kompensierende Maßnahmen getroffen:
+                    </p>
+                    <p>Punkte einfügen</p>
+                    <p>
+                      Die erhöhte Brandgefährdung betrifft nur folgende
+                      Geschosse
+                    </p>
+                    <p style={{ textAlign: "center" }}>
+                      EG
+                      <br /> 2.OG
+                    </p>
+                    <p>
+                      Alle anderen Geschosse werden nach normaler
+                      Brandgefährdung bewertet
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <hr />
+        <table
+          width="100%"
+          className="table5"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Löschmitteleinheiten</h2>
+                    <p>
+                      Die Geschosse sind wie in der unten aufgeführten Tabelle
+                      mit den notwendigen Löschmitteleinheiten (LE) nach ASR
+                      A2.2 auszustatten.
+                    </p>
+                    <br />
+                    <br />
+
+                    <div style={{ textAlign: "center" }}>
+                      <table
+                        cellSpacing="0"
+                        cellPadding="0"
+                        style={{
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          border: "1px solid #000000",
+                          borderCollapse: "collapse",
+                        }}
+                      >
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>
+                                Stockwerk
+                              </span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>LE</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>EG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>414</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>1. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>426</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>2. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>342</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>3. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>342</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>4. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>252</span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>5. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "100px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                                lineHeight: "16px",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>216</span>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <br />
+                    <p>
+                      Bei der Verortung der Feuerlöscher ist der Absatz 5.2.3
+                      aus der ASR A2.2 zu beachten.
+                    </p>
+                    <p style={{ fontStyle: "italic" }}>
+                      „die Entfernung von jeder Stelle zum nächstgelegenen
+                      Feuerlöscher möglichst nicht mehr als 20 m (tatsächliche
+                      Laufweglänge) beträgt, um einen schnellen Zugriff zu
+                      gewährleisten.“
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="body1" class="body">
+        <table
+          width="100%"
+          className="table5"
+          border="0"
+          cellspacing="0"
+          cellpadding="0"
+        >
+          <tr>
+            <td class="td3 column-top" width="100%" colspan="2">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <th class="th3 column" width="">
+                    <img
+                      src="/assets/images/footpic.jpg"
+                      width="7%"
+                      border="0"
+                      alt=""
+                    />
+                  </th>
+                </tr>
+
+                <br />
+                <tr>
+                  <td>
+                    <h2 class="h21 main-head">Ausstattung Feuerlöscher</h2>
+                    <p>
+                      Für die einzelnen Geschosse werden folgende Feuerlöscher
+                      notwendig
+                    </p>
+                    <br />
+                    <br />
+
+                    <div style={{ textAlign: "center" }}>
+                      <table
+                        cellSpacing="0"
+                        cellPadding="0"
+                        style={{
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          border: "1px solid #000000",
+                          borderCollapse: "collapse",
+                        }}
+                      >
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>
+                                Stockwerk
+                              </span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>
+                                Menge Feuerlöscher
+                              </span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>
+                                Notwendige LE pro
+                              </span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>EG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>1. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>2. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>3. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>4. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style={{
+                              width: "80px",
+                              borderRightStyle: "solid",
+                              borderRightWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}>5. OG</span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                          <td
+                            style={{
+                              width: "200px",
+                              borderLeftStyle: "solid",
+                              borderLeftWidth: "1px",
+                              borderBottomStyle: "solid",
+                              borderBottomWidth: "1px",
+                              paddingRight: "7px",
+                              paddingLeft: "7px",
+                            }}
+                          >
+                            <p
+                              style={{
+                                marginTop: "0px",
+                                marginBottom: "15px",
+                                textAlign: "center",
+                              }}
+                            >
+                              <span style={{ fontSize: "16px" }}></span>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <br />
+                    <p>Für Rückfragen stehe ich gerne zur Verfügung.</p>
+
+                    <br />
+                    <p>Mit freundlichen Grüßen</p>
+
+                    <p>Brandschutzbeauftragter</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <footer
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "10px",
+          }}
+        >
+          <div>
+            <p style={{ fontSize: "15px", fontWeight: "700" }}>
+              Stand: 06.12.2022
+            </p>
+          </div>
+          <div>
+            <p style={{ fontSize: "15px", fontWeight: "700" }}>Seite 6 von 6</p>
+          </div>
+          <img
+            src="/assets/images/logo003.png"
+            alt=""
+            style={{ width: "5%" }}
+          />
+        </footer>
+      </div>
+
+      <button onClick={generatePDF1}>Download PDF</button>
+      <button onClick={downloadPDF}>Download PDF</button>
+      {/* <button onClick={generatePDF2}>Download PDF2</button> */}
       {Show_BSO_A_template_1 ? (
         <>
           <h3>Brandschutzordnung_DIN_14096_TeilA_Deutsch</h3>

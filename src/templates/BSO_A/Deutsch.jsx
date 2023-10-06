@@ -1,4 +1,4 @@
-import "./style.css";
+import "./deutsch.css";
 
 const Deutsch = (props) => {
   return (

@@ -466,6 +466,10 @@ hr {
 .verti h3 {
   margin: 0;
 }
+
+.logofst {
+  float: left;
+}
 @media print {
   body {
     padding: 0 !important;

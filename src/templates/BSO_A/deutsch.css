@@ -1,0 +1,25 @@
+.body {
+  width: 100%;
+  margin: 20px auto;
+  background: #fff;
+  border: 3px solid #000000;
+}
+
+/* .body {
+  width: 210mm !important;
+  height: 100% !important;
+  margin: 20px auto !important;
+  background: #fff !important;
+  border: 3px solid #000000 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+} */
+.center {
+  text-align: center;
+}
+.bicof {
+  font-size: 50px;
+}
+.img1 {
+  width: 80px;
+}
